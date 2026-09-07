@@ -23,7 +23,8 @@
     /* HEADER & NAVIGATION (FIXED Z-INDEX) */
     .header { position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,.05); background: rgba(5,11,18,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     .nav { height: 90px; display: flex; align-items: center; gap: 30px; position: relative; }
-    .brand img { width: 70px; height: 70px; border-radius: 50%; display: block; object-fit: cover; position: relative; z-index: 1001; }
+    /* YELLOW RING ADDED TO LOGO */
+    .brand img { width: 70px; height: 70px; border-radius: 50%; display: block; object-fit: cover; position: relative; z-index: 1001; border: 2px solid var(--yellow); }
     
     .nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
     .nav-links a { font-size: 13px; font-weight: 700; color: #fff; position: relative; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -87,7 +88,7 @@
     /* FOOTER */
     footer { background: var(--navy); color: #aab5c2; padding: 60px 0 20px; }
     .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
-    .footer-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--yellow); }
+    .footer-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--yellow); object-fit: cover; }
     .footer-grid p { font-size: 12px; line-height: 1.8; max-width: 280px; }
     .footer-grid h4 { color: #fff; font-size: 12px; letter-spacing: 1px; margin: 10px 0 20px; text-transform: uppercase; font-weight: 800; }
     .footer-grid a, .footer-grid span { display: flex; align-items: center; gap: 10px; font-size: 12px; margin: 12px 0; color: #aab5c2; transition: color 0.2s; }
@@ -101,28 +102,15 @@
     /* RESPONSIVE & PERFECT SIDEBAR MENU */
     @media(max-width: 950px) {
       .nav-links {
-        display: flex; 
-        flex-direction: column; 
-        align-items: flex-start; 
-        position: fixed; 
+        display: flex; flex-direction: column; align-items: flex-start; position: fixed; 
         /* Sidebar layout strictly locked to viewport bounds */
         top: 0; bottom: 0; left: auto; right: -320px; height: 100vh; height: 100dvh;
-        width: 320px; 
-        background: #050b12; /* Solid dark background to prevent text blur */
-        box-shadow: -15px 0 50px rgba(0,0,0,0.9);
-        padding: 100px 40px 40px; 
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-        z-index: 999;
-        overflow-y: auto;
+        width: 320px; background: #050b12; box-shadow: -15px 0 50px rgba(0,0,0,0.9);
+        padding: 100px 40px 40px; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        z-index: 999; overflow-y: auto;
       }
       .nav-links.mobile-open { right: 0; }
-      .nav-links a { 
-        font-size: 18px; 
-        padding: 15px 0; 
-        border-bottom: 1px solid rgba(255,255,255,0.05); 
-        width: 100%; 
-        color: #fff;
-      }
+      .nav-links a { font-size: 18px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; color: #fff;}
       .nav-links a:hover, .nav-links .active { color: var(--yellow); }
       .menu-toggle { display: block; margin-left: auto; }
       .nav-actions { display: none; }
@@ -136,7 +124,7 @@
       .container { width: min(100% - 28px, 1200px); }
       .nav { height: 75px; }
       .brand img { width: 55px; height: 55px; }
-      .inner-hero { min-height: 400px; padding-top: 60px; }
+      .inner-hero { min-height: 400px; padding-top: 60px; text-align: center; }
       .inner-hero h1 { font-size: 55px; }
       
       .services-wrapper { padding: 70px 0; }
@@ -175,6 +163,10 @@
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           </span>
           <span><b>055 550 5171</b><small>Call Us Anytime</small></span>
+        </a>
+        <a class="btn btn-yellow" href="https://wa.me/233555505171" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          WhatsApp
         </a>
       </div>
     </div>
@@ -285,7 +277,7 @@
     </div>
     <div class="container copyright">
       <span>© 2026 2A Auto Parts. All Rights Reserved.</span>
-      <span>Designed with ♥ for performance.</span>
+      <span>Designed with ♥ for performance. By SkyNet Consult.</span>
     </div>
   </footer>
 
