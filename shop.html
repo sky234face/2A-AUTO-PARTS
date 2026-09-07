@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2A Auto Parts | Massive Heavy-Duty Inventory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* GLOBAL STYLES */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #050b12; --navy-light: #0a1829; --yellow: #ffd000; --white: #fff; --muted: #aab5c2; --border: #e7eaed; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', Arial, sans-serif; color: #111; background: #0b1c31; overflow-x: hidden; } /* Dark theme for heavy-duty feel */
+    a { text-decoration: none; color: inherit; transition: all 0.25s ease; }
+    .container { width: min(1350px, calc(100% - 48px)); margin: auto; }
+
+    /* HEADER & NAVIGATION (FIXED Z-INDEX) */
+    .header { position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,.05); background: rgba(5,11,18,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav { height: 90px; display: flex; align-items: center; gap: 30px; position: relative; }
+    .brand img { width: 70px; height: 70px; border-radius: 50%; display: block; object-fit: cover; position: relative; z-index: 1001; }
+    
+    .nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
+    .nav-links a { font-size: 13px; font-weight: 700; color: #fff; position: relative; text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-links a:hover, .nav-links .active { color: var(--yellow); }
+    
+    .nav-actions { display: flex; align-items: center; gap: 24px; margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 24px; }
+    .phone { display: flex; gap: 12px; align-items: center; color: #fff; transition: transform 0.2s; }
+    .phone:hover { transform: translateY(-2px); }
+    .phone-icon { color: var(--yellow); display: flex; align-items: center; }
+    .phone small, .phone b { display: block; }
+    .phone b { font-size: 15px; font-weight: 800; }
+    .phone small { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 26px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; cursor: pointer; border-radius: 2px; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+    .btn-yellow { background: var(--yellow); color: var(--navy); }
+    .btn-yellow:hover { background: #ffe047; }
+    .btn-outline { border-color: rgba(255,255,255,.5); color: #fff; background: transparent; }
+    .btn-outline:hover { background: #fff; color: var(--navy); }
+
+    /* MOBILE MENU ICON & OVERLAY */
+    .menu-toggle { display: none; background: none; border: 0; color: #fff; cursor: pointer; transition: color 0.2s; z-index: 1002; position: relative; }
+    .menu-toggle:hover { color: var(--yellow); }
+    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 998; opacity: 0; visibility: hidden; transition: 0.4s ease; }
+    .nav-overlay.mobile-open { opacity: 1; visibility: visible; }
+
+    /* INNER HERO - MASSIVE TRUCK FOCUS */
+    .inner-hero { min-height: 500px; background: #050b12 url("https://images.unsplash.com/photo-1601584115197-04ecc0da31d8?auto=format&fit=crop&w=2200&q=85") center/cover no-repeat; display: flex; align-items: center; position: relative; padding-top: 80px; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,8,15,.98) 0%, rgba(2,8,15,.85) 45%, rgba(2,8,15,.4) 100%), linear-gradient(0deg, rgba(11,28,49,1), transparent 30%); }
+    .hero-content { position: relative; z-index: 2; padding: 40px 0 60px; width: 100%; max-width: 800px; }
+    .eyebrow { color: var(--yellow); font-size: 14px; font-weight: 900; letter-spacing: 2px; margin-bottom: 16px; text-transform: uppercase; display: inline-block; border-bottom: 2px solid var(--yellow); padding-bottom: 4px; }
+    .inner-hero h1 { font-family: "Barlow Condensed", sans-serif; font-size: clamp(50px, 7vw, 90px); line-height: .85; color: #fff; font-weight: 900; letter-spacing: -1px; margin-bottom: 20px; text-transform: uppercase; }
+    .inner-hero h1 span { color: var(--yellow); }
+    .inner-hero p { color: #d5dbe2; font-size: 16px; line-height: 1.6; font-weight: 500; max-width: 650px; margin-bottom: 30px; }
+
+    /* INFINITE SCROLLING TICKER */
+    .ticker-wrap { background: var(--yellow); padding: 12px 0; overflow: hidden; position: relative; z-index: 10; border-top: 2px solid #000; border-bottom: 2px solid #000; }
+    .ticker { display: flex; white-space: nowrap; animation: ticker 40s linear infinite; font-family: "Barlow Condensed", sans-serif; font-size: 20px; font-weight: 800; color: #07172a; text-transform: uppercase; letter-spacing: 1px; }
+    .ticker-item { padding: 0 30px; display: flex; align-items: center; }
+    .ticker-item::after { content: '•'; margin-left: 60px; color: #000; }
+    @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+
+    /* EXPANSIVE MEGA-CATALOG */
+    .catalog-section { padding: 80px 0 120px; }
+    .section-heading { text-align: center; margin-bottom: 60px; }
+    .section-heading h2 { font-family: "Barlow Condensed", sans-serif; font-size: 55px; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 15px; text-transform: uppercase; }
+    .section-heading h2 span { color: #e0ad00; }
+    .section-heading p { color: #aab5c2; font-size: 16px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+    /* BIG IMAGE GRID */
+    .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    
+    .catalog-card { background: #061426; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .catalog-card:hover { transform: translateY(-8px); border-color: var(--yellow); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+    
+    .catalog-image { height: 350px; background-size: cover; background-position: center; border-bottom: 4px solid var(--yellow); position: relative; }
+    .catalog-tag { position: absolute; top: 20px; left: 20px; background: rgba(7,23,42,0.9); backdrop-filter: blur(4px); color: var(--yellow); padding: 8px 16px; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border: 1px solid var(--yellow); }
+    
+    .catalog-content { padding: 40px; flex-grow: 1; display: flex; flex-direction: column; }
+    .catalog-content h3 { font-family: "Barlow Condensed", sans-serif; font-size: 38px; font-weight: 800; color: #fff; margin-bottom: 20px; text-transform: uppercase; line-height: 1; }
+    
+    /* Specifications List inside the card */
+    .tech-specs { list-style: none; margin-bottom: 30px; flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tech-specs li { font-size: 13px; color: #c5ced8; display: flex; align-items: flex-start; line-height: 1.5; }
+    .tech-specs li::before { content: '✓'; color: var(--yellow); font-weight: 900; margin-right: 8px; font-size: 14px; }
+    
+    .catalog-content .btn { width: 100%; border-radius: 4px; }
+    
+    /* Specific Images for the 8 Categories */
+    .img-brakes { background-image: url("https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1000&q=80"); }
+    .img-emissions { background-image: url("https://images.unsplash.com/photo-1606220573934-2e6f4a362247?auto=format&fit=crop&w=1000&q=80"); }
+    .img-fluids { background-image: url("https://images.unsplash.com/photo-1635784063385-8b5d9f7e9c3a?auto=format&fit=crop&w=1000&q=80"); }
+    .img-engine { background-image: url("https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1000&q=80"); }
+    .img-drivetrain { background-image: url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=80"); }
+    .img-tires { background-image: url("https://images.unsplash.com/photo-1551522435-a13afa10f103?auto=format&fit=crop&w=1000&q=80"); }
+    .img-body { background-image: url("https://images.unsplash.com/photo-1600676994191-236b28eb97bb?auto=format&fit=crop&w=1000&q=80"); }
+    .img-workshop { background-image: url("https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1000&q=80"); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: #aab5c2; padding: 60px 0 20px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+    .footer-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--yellow); }
+    .footer-grid p { font-size: 12px; line-height: 1.8; max-width: 280px; }
+    .footer-grid h4 { color: #fff; font-size: 12px; letter-spacing: 1px; margin: 10px 0 20px; text-transform: uppercase; font-weight: 800; }
+    .footer-grid a, .footer-grid span { display: flex; align-items: center; gap: 10px; font-size: 12px; margin: 12px 0; color: #aab5c2; transition: color 0.2s; }
+    .footer-grid a:hover { color: var(--yellow); }
+    .copyright { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; padding-top: 20px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* ANIMATIONS */
+    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE & PERFECT SIDEBAR MENU */
+    @media(max-width: 1050px) {
+      .tech-specs { grid-template-columns: 1fr; }
+    }
+
+    @media(max-width: 950px) {
+      .nav-links {
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        position: fixed; 
+        top: 0; 
+        right: -320px;
+        width: 320px; 
+        height: 100vh; 
+        background: #050b12; /* Solid dark background to prevent text blur */
+        box-shadow: -15px 0 50px rgba(0,0,0,0.9);
+        padding: 100px 40px 40px; 
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        z-index: 999;
+      }
+      .nav-links.mobile-open { right: 0; }
+      .nav-links a { 
+        font-size: 18px; 
+        padding: 15px 0; 
+        border-bottom: 1px solid rgba(255,255,255,0.05); 
+        width: 100%; 
+        color: #fff;
+      }
+      .nav-links a:hover, .nav-links .active { color: var(--yellow); }
+      .menu-toggle { display: block; margin-left: auto; }
+      .nav-actions { display: none; }
+      
+      .catalog-grid { grid-template-columns: 1fr; }
+      .catalog-image { height: 280px; }
+    }
+
+    @media(max-width: 680px) {
+      .container { width: min(100% - 28px, 1350px); }
+      .nav { height: 75px; }
+      .brand img { width: 55px; height: 55px; }
+      .inner-hero { min-height: 450px; padding-top: 60px; text-align: center; }
+      .inner-hero h1 { font-size: 45px; }
+      .eyebrow { margin: 0 auto 16px; }
+      
+      .section-heading h2 { font-size: 38px; }
+      .catalog-content h3 { font-size: 32px; }
+      
+      .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+      .copyright { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-overlay"></div>
+
+  <header class="header" id="top">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="2A Auto Parts home">
+        <img src="logo.png" alt="2A Auto Parts logo" loading="lazy">
+      </a>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a class="active" href="shop.html">Shop ▾</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="phone" href="tel:+233555505171">
+          <span class="phone-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </span>
+          <span><b>055 550 5171</b><small>Call Us Anytime</small></span>
+        </a>
+        <a class="btn btn-yellow" href="https://wa.me/233555505171" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="inner-hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content animate-on-scroll">
+        <p class="eyebrow">THE COMMERCIAL TRUCK MASTER CATALOG</p>
+        <h1>WE HAVE<br><span>EVERYTHING.</span></h1>
+        <p>From 15W-40 Oil to Twin-Cylinder Air Compressors. If a Sinotruk, Actros, or DAF needs it, we stock it in Tema.</p>
+        <a class="btn btn-yellow" href="#categories" style="margin-top: 15px;">Explore the Master Inventory <span>↓</span></a>
+      </div>
+    </section>
+
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <div class="ticker-item">Air Compressors (Single & Twin)</div>
+        <div class="ticker-item">Heavy-Duty Batteries (24V)</div>
+        <div class="ticker-item">Commercial Brake Shoes & Drums</div>
+        <div class="ticker-item">DEF / AdBlue Injectors</div>
+        <div class="ticker-item">15W-40 CI-4 Engine Oil</div>
+        <div class="ticker-item">Exhaust Flexible Pipes</div>
+        <div class="ticker-item">Tie Rods Complete & Ends</div>
+        <div class="ticker-item">High-Output Alternators</div>
+        <div class="ticker-item">Hydraulic Jacks (All Sizes)</div>
+        <div class="ticker-item">S-Camshafts & Slack Adjusters</div>
+        <div class="ticker-item">Wiper Blades & Linkages</div>
+        <div class="ticker-item">Air Compressors (Single & Twin)</div>
+        <div class="ticker-item">Heavy-Duty Batteries (24V)</div>
+        <div class="ticker-item">Commercial Brake Shoes & Drums</div>
+        <div class="ticker-item">DEF / AdBlue Injectors</div>
+        <div class="ticker-item">15W-40 CI-4 Engine Oil</div>
+        <div class="ticker-item">Exhaust Flexible Pipes</div>
+        <div class="ticker-item">Tie Rods Complete & Ends</div>
+        <div class="ticker-item">High-Output Alternators</div>
+        <div class="ticker-item">Hydraulic Jacks (All Sizes)</div>
+        <div class="ticker-item">S-Camshafts & Slack Adjusters</div>
+        <div class="ticker-item">Wiper Blades & Linkages</div>
+      </div>
+    </div>
+
+    <section class="catalog-section" id="categories">
+      <div class="container">
+        <div class="section-heading animate-on-scroll">
+          <h2>HEAVY-DUTY <span>MASTER CATALOG</span></h2>
+          <p>We supply exact-specification structural hardware, friction materials, and electronics for major platforms including Mercedes-Benz Actros, Sinotruk HOWO, DAF, Mack, and Volvo.</p>
+        </div>
+
+        <div class="catalog-grid">
+          
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-brakes">
+              <span class="catalog-tag">Air & Friction Hardware</span>
+            </div>
+            <div class="catalog-content">
+              <h3>1. Braking Systems</h3>
+              <ul class="tech-specs">
+                <li>Twin & Single-Cylinder Air Compressors</li>
+                <li>M39 Desiccant Cartridges & APUs</li>
+                <li>Foot Brake / Treadle Valves</li>
+                <li>EBS/ABS Wheel Speed Sensors</li>
+                <li>Type 24/30 Spring Brake Chambers</li>
+                <li>Manual & Auto Slack Adjusters</li>
+                <li>S-Camshafts & Roller Bushings</li>
+                <li>Lined Brake Shoes & 410mm Drums</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Braking%20System%20Parts" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+          
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-engine">
+              <span class="catalog-tag">Rebuild Engineering</span>
+            </div>
+            <div class="catalog-content">
+              <h3>2. Engine Components</h3>
+              <ul class="tech-specs">
+                <li>Wet & Dry Cylinder Liners</li>
+                <li>Forged Steel Pistons & Ring Sets</li>
+                <li>Tri-Metal Main Bearings</li>
+                <li>Multi-Layer Steel (MLS) Head Gaskets</li>
+                <li>Stellite-Faced Exhaust Valves</li>
+                <li>Turbochargers (VGT/Wastegated)</li>
+                <li>Exhaust Flexible Pipes & V-Bands</li>
+                <li>High-Pressure Common-Rail Pumps</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Engine%20Rebuild%20Parts" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-fluids">
+              <span class="catalog-tag">Fluids & Protection</span>
+            </div>
+            <div class="catalog-content">
+              <h3>3. Lubricants & Filtration</h3>
+              <ul class="tech-specs">
+                <li>15W-40 / 10W-40 Engine Oil (208L & 20L)</li>
+                <li>85W-140 GL-5 Hypoid Axle Oil</li>
+                <li>NLGI Grade 2 Lithium Chassis Grease</li>
+                <li>Heavy-Duty ELC 50/50 Coolants</li>
+                <li>Primary 30-Micron Fuel-Water Separators</li>
+                <li>Centrifugal Bypass Oil Filters</li>
+                <li>Radial-Seal Cellulose Air Filters</li>
+                <li>HVAC Particulate Cabin Filters</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Oils%20and%20Filters" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-drivetrain">
+              <span class="catalog-tag">Chassis & Power</span>
+            </div>
+            <div class="catalog-content">
+              <h3>4. Drivetrain & Suspension</h3>
+              <ul class="tech-specs">
+                <li>430mm Ceramometallic Clutch Kits</li>
+                <li>1710/1810 Series Propeller U-Joints</li>
+                <li>Parabolic Leaf Springs & U-Bolts</li>
+                <li>Torque Rods (V-Stays) & Center Bushings</li>
+                <li>Air Suspension Bellows / Bags</li>
+                <li>Tie Rods Complete & Tie Rod Ends</li>
+                <li>Hardened Tapered Kingpin Assemblies</li>
+                <li>High-Output Alternators & 24V Batteries</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Drivetrain%20or%20Suspension%20Parts" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-emissions">
+              <span class="catalog-tag">Aftertreatment</span>
+            </div>
+            <div class="catalog-content">
+              <h3>5. Emission Control</h3>
+              <ul class="tech-specs">
+                <li>DEF/AdBlue Injectors & Dosing Modules</li>
+                <li>Upstream & Downstream NOx Sensors</li>
+                <li>DPF Ceramic Substrate Cores</li>
+                <li>Differential Pressure Sensors</li>
+                <li>EGR Valves & EGR Coolers</li>
+                <li>DEF Tank Heater Elements</li>
+                <li>Crystallization-Resistant Tubing</li>
+                <li>Emissions Diagnostic Harnesses</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Emission%20or%20DEF%20Parts" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-tires">
+              <span class="catalog-tag">Rolling Stock</span>
+            </div>
+            <div class="catalog-content">
+              <h3>6. Tires & Wheels</h3>
+              <ul class="tech-specs">
+                <li>Steer-Axle Ribbed Tread Tires</li>
+                <li>Drive-Axle Lug Pattern Tires</li>
+                <li>Trailer-Axle Radials (22.5" & 24.5")</li>
+                <li>Steel Disc Wheels & Hub-Pilots</li>
+                <li>Forged Aluminum Alloy Wheels</li>
+                <li>Heavy-Duty Valve Stems & TPMS</li>
+                <li>Pre-Cured Tread Rubber for Retreading</li>
+                <li>Wheel Weights & Spacer Bands</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Commercial%20Tires" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-body">
+              <span class="catalog-tag">Structural Integrity</span>
+            </div>
+            <div class="catalog-content">
+              <h3>7. Body & Cabin Hardware</h3>
+              <ul class="tech-specs">
+                <li>LED Headlights & Tail Light Assemblies</li>
+                <li>Hydraulic Cab Tilt Cylinders</li>
+                <li>Side Spot Mirrors & Mirror Brackets</li>
+                <li>Wiper Motors & Heavy-Duty Blades</li>
+                <li>Multi-Stage Tipper Hoist Cylinders</li>
+                <li>Fifth Wheel Top Plates & 3.5" Kingpins</li>
+                <li>Trailer Landing Gear & Cranks</li>
+                <li>Frame Rails & Cross-Members</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Cab%20or%20Body%20Parts" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+          <div class="catalog-card animate-on-scroll">
+            <div class="catalog-image img-workshop">
+              <span class="catalog-tag">Tools & Diagnostics</span>
+            </div>
+            <div class="catalog-content">
+              <h3>8. Workshop Equipment</h3>
+              <ul class="tech-specs">
+                <li>Hydraulic Jacks (Bottle & Floor - All Sizes)</li>
+                <li>J1939/J1708 Diagnostic Scanners</li>
+                <li>Torque Multipliers & Wheel Wrenches</li>
+                <li>Transmission Jacks</li>
+                <li>Roller Brake Testers</li>
+                <li>Air-Line Pressure Gauges</li>
+                <li>Threadlocker & Anti-Seize Compounds</li>
+                <li>Wheel-Nut Safety Indicators</li>
+              </ul>
+              <a class="btn btn-yellow" href="https://wa.me/233555505171?text=Hi,%20I'm%20looking%20for%20Jacks%20or%20Workshop%20Tools" target="_blank" rel="noopener">Check Stock ↗</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid animate-on-scroll">
+      <div>
+        <img src="logo.png" alt="2A Auto Parts" class="footer-logo" loading="lazy">
+        <p>2A Auto Parts is your ultimate source for commercial truck and auto parts in Ghana. If it has wheels, we have the parts to keep it moving.</p>
+      </div>
+      <div>
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop</a>
+      </div>
+      <div>
+        <h4>CATEGORIES</h4>
+        <a href="shop.html">Engine Parts</a>
+        <a href="shop.html">Brake System</a>
+        <a href="shop.html">Electrical Parts</a>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <a href="tel:+233555505171"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> 055 550 5171</a>
+        <a href="mailto:2aautoparts@gmail.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> 2aautoparts@gmail.com</a>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Opp. Ashaisec, Goil Filling Station,<br>Tema, Ghana</span>
+      </div>
+    </div>
+    <div class="container copyright">
+      <span>© 2026 2A Auto Parts. All Rights Reserved.</span>
+      <span>Designed with ♥ for performance.</span>
+    </div>
+  </footer>
+
+  <script src="global.js"></script>
+</body>
+</html>

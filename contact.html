@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2A Auto Parts | Contact Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* GLOBAL STYLES (Synced with Premium Homepage) */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #050b12; --navy-light: #0a1829; --yellow: #ffd000; --white: #fff; --muted: #aab5c2; --border: #e7eaed; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', Arial, sans-serif; color: #111; background: #f6f8f9; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; transition: all 0.25s ease; }
+    .container { width: min(1200px, calc(100% - 48px)); margin: auto; }
+
+    /* HEADER & NAVIGATION (FIXED Z-INDEX) */
+    .header { position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,.05); background: rgba(5,11,18,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav { height: 90px; display: flex; align-items: center; gap: 30px; position: relative; }
+    .brand img { width: 70px; height: 70px; border-radius: 50%; display: block; object-fit: cover; position: relative; z-index: 1001; }
+    
+    .nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
+    .nav-links a { font-size: 13px; font-weight: 700; color: #fff; position: relative; text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-links a:hover, .nav-links .active { color: var(--yellow); }
+    
+    .nav-actions { display: flex; align-items: center; gap: 24px; margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 24px; }
+    .phone { display: flex; gap: 12px; align-items: center; color: #fff; transition: transform 0.2s; }
+    .phone:hover { transform: translateY(-2px); }
+    .phone-icon { color: var(--yellow); display: flex; align-items: center; }
+    .phone small, .phone b { display: block; }
+    .phone b { font-size: 15px; font-weight: 800; }
+    .phone small { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 26px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; cursor: pointer; border-radius: 2px; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+    .btn-yellow { background: var(--yellow); color: var(--navy); }
+    .btn-yellow:hover { background: #ffe047; }
+    .btn-outline { border-color: rgba(255,255,255,.5); color: #fff; background: transparent; }
+    .btn-outline:hover { background: #fff; color: var(--navy); }
+    .btn-dark { background: var(--navy-light); color: #fff; }
+    .btn-dark:hover { background: var(--yellow); color: var(--navy); }
+
+    /* MOBILE MENU ICON & OVERLAY */
+    .menu-toggle { display: none; background: none; border: 0; color: #fff; cursor: pointer; transition: color 0.2s; z-index: 1002; position: relative; }
+    .menu-toggle:hover { color: var(--yellow); }
+    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 998; opacity: 0; visibility: hidden; transition: 0.4s ease; }
+    .nav-overlay.mobile-open { opacity: 1; visibility: visible; }
+
+    /* INNER HERO */
+    .inner-hero { min-height: 450px; background: #050b12 url("https://images.unsplash.com/photo-1601584115197-04ecc0da31d8?auto=format&fit=crop&w=2000&q=85") center/cover no-repeat; display: flex; align-items: center; position: relative; padding-top: 80px; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,11,18,0.95) 0%, rgba(5,11,18,0.7) 50%, rgba(5,11,18,0.1) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 40px 0 60px; text-align: center; width: 100%; }
+    .eyebrow { color: var(--yellow); font-size: 13px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+    .inner-hero h1 { font-family: "Barlow Condensed", sans-serif; font-size: clamp(60px, 8vw, 95px); line-height: 0.9; color: #fff; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
+    .inner-hero h1 span { color: var(--yellow); }
+
+    /* DEDICATED CONTACT PAGE LAYOUT */
+    .contact-page-wrapper { padding: 100px 0; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: #fff; box-shadow: 0 20px 50px rgba(5,11,18,0.08); border-radius: 8px; overflow: hidden; }
+    
+    /* Contact Form Side */
+    .contact-form-container { padding: 70px 60px; background: #fff; }
+    .contact-form-container h3 { font-family: "Barlow Condensed", sans-serif; font-size: 38px; color: var(--navy); margin-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    .contact-form-container p { color: #4e5965; font-size: 15px; margin-bottom: 35px; line-height: 1.6; }
+    .form-group { margin-bottom: 22px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 800; color: var(--navy-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-control { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 14px; color: #111; background: #f8f9fa; transition: all 0.3s; }
+    .form-control:focus { outline: none; border-color: var(--yellow); background: #fff; box-shadow: 0 0 0 4px rgba(255, 208, 0, 0.15); }
+    textarea.form-control { resize: vertical; min-height: 140px; }
+    
+    /* Contact Info Side */
+    .contact-info { padding: 70px 60px; background: var(--navy-light); color: #fff; }
+    .contact-info h2 { font-family: "Barlow Condensed", sans-serif; font-size: 47px; line-height: 0.95; margin-bottom: 35px; font-weight: 800; }
+    .contact-info h2 span { color: var(--yellow); }
+    .contact-line { display: flex; gap: 18px; margin: 25px 0; font-size: 15px; color: #c5ced8; line-height: 1.6; align-items: flex-start; }
+    .contact-line svg { color: var(--yellow); flex-shrink: 0; margin-top: 2px; }
+    .contact-line a { font-weight: 700; color: #fff; font-size: 18px; transition: color 0.3s; }
+    .contact-line a:hover { color: var(--yellow); }
+    .info-label { display: block; font-size: 11px; font-weight: 800; color: var(--yellow); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
+
+    /* MAP SECTION */
+    .map-full { height: 450px; position: relative; overflow: hidden; background: #e5e9ec; border-top: 1px solid var(--border); }
+    .map-grid { position: absolute; inset: 0; background-image: url("https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80"); background-size: cover; background-position: center; opacity: 0.5; filter: grayscale(100%) contrast(120%); }
+    .map-pin { position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 10px; background: #fff; padding: 12px 20px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); font-size: 14px; font-weight: 800; color: var(--navy); z-index: 2; transition: transform 0.3s ease; }
+    .map-pin svg { color: var(--yellow); }
+    .map-full:hover .map-pin { transform: translate(-50%, -60%); }
+    .map-full > a { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 15px 26px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; border-radius: 4px; transition: all 0.3s; z-index: 2; }
+    .map-full > a:hover { background: var(--yellow); color: var(--navy); transform: translate(-50%, -3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: #aab5c2; padding: 60px 0 20px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+    .footer-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--yellow); }
+    .footer-grid p { font-size: 12px; line-height: 1.8; max-width: 280px; }
+    .footer-grid h4 { color: #fff; font-size: 12px; letter-spacing: 1px; margin: 10px 0 20px; text-transform: uppercase; font-weight: 800; }
+    .footer-grid a, .footer-grid span { display: flex; align-items: center; gap: 10px; font-size: 12px; margin: 12px 0; color: #aab5c2; transition: color 0.2s; }
+    .footer-grid a:hover { color: var(--yellow); }
+    .copyright { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; padding-top: 20px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* ANIMATIONS */
+    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE & PERFECT SIDEBAR MENU */
+    @media(max-width: 950px) {
+      .nav-links {
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        position: fixed; 
+        top: 0; 
+        right: -320px;
+        width: 320px; 
+        height: 100vh; 
+        background: #050b12; /* Solid dark background to prevent text blur */
+        box-shadow: -15px 0 50px rgba(0,0,0,0.9);
+        padding: 100px 40px 40px; 
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        z-index: 999;
+      }
+      .nav-links.mobile-open { right: 0; }
+      .nav-links a { 
+        font-size: 18px; 
+        padding: 15px 0; 
+        border-bottom: 1px solid rgba(255,255,255,0.05); 
+        width: 100%; 
+        color: #fff;
+      }
+      .nav-links a:hover, .nav-links .active { color: var(--yellow); }
+      .menu-toggle { display: block; margin-left: auto; }
+      .nav-actions { display: none; }
+      
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+
+    @media(max-width: 680px) {
+      .container { width: min(100% - 28px, 1200px); }
+      .nav { height: 75px; }
+      .brand img { width: 55px; height: 55px; }
+      .inner-hero { min-height: 400px; padding-top: 60px; }
+      .inner-hero h1 { font-size: 55px; }
+      
+      .contact-page-wrapper { padding: 60px 0; }
+      .contact-form-container, .contact-info { padding: 40px 25px; }
+      .contact-info h2 { font-size: 40px; }
+      .map-full { height: 350px; }
+      
+      .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+      .copyright { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-overlay"></div>
+
+  <header class="header" id="top">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="2A Auto Parts home">
+        <img src="logo.png" alt="2A Auto Parts logo" loading="lazy">
+      </a>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop ▾</a>
+        <a href="services.html">Services</a>
+        <a class="active" href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="phone" href="tel:+233555505171">
+          <span class="phone-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </span>
+          <span><b>055 550 5171</b><small>Call Us Anytime</small></span>
+        </a>
+        <a class="btn btn-yellow" href="https://wa.me/233555505171" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="inner-hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content animate-on-scroll">
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h1>CONTACT <span>US</span></h1>
+      </div>
+    </section>
+
+    <section class="contact-page-wrapper">
+      <div class="container contact-layout animate-on-scroll">
+        
+        <div class="contact-form-container">
+          <h3>Send Us a Message</h3>
+          <p>Looking for a specific part? Have a question about our stock? Fill out the form below and our team will get back to you shortly.</p>
+          
+          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" class="form-control" placeholder="e.g. Kwame Osei" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-control" placeholder="e.g. 055 550 5171" required>
+            </div>
+            <div class="form-group">
+              <label for="part">Part Needed (Optional)</label>
+              <input type="text" id="part" class="form-control" placeholder="e.g. Heavy-Duty Air Compressor">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" class="form-control" placeholder="How can we help your fleet today?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark" style="width: 100%;">Send Message <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <h2>We Are Here<br>To <span>Serve You</span></h2>
+          
+          <div class="contact-line">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div>
+              <span class="info-label">Visit Our Shop</span>
+              Opp. Ashaisec, Goil Filling Station,<br>Tema, Greater Accra Region,<br>Ghana
+            </div>
+          </div>
+          
+          <div class="contact-line">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <div>
+              <span class="info-label">Call Us Directly</span>
+              <a href="tel:+233555505171">055 550 5171</a>
+            </div>
+          </div>
+          
+          <div class="contact-line">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <div>
+              <span class="info-label">Business Hours</span>
+              Monday – Saturday<br>8:00 AM – 6:00 PM
+            </div>
+          </div>
+
+          <div style="margin-top: 50px;">
+            <a class="btn btn-yellow" href="https://wa.me/233555505171" target="_blank" rel="noopener" style="width: 100%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-full animate-on-scroll">
+      <div class="map-grid"></div>
+      <div class="map-pin">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
+        2A Auto Parts
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=2A+Auto+Parts+Tema+Ghana" target="_blank" rel="noopener">Get Directions via Google Maps <svg style="display:inline; margin-bottom:-2px; margin-left:4px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid animate-on-scroll">
+      <div>
+        <img src="logo.png" alt="2A Auto Parts" class="footer-logo" loading="lazy">
+        <p>2A Auto Parts is your trusted partner for quality auto parts in Ghana. Quality you can trust, service you can rely on.</p>
+      </div>
+      <div>
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop</a>
+      </div>
+      <div>
+        <h4>CATEGORIES</h4>
+        <a href="shop.html">Engine Parts</a>
+        <a href="shop.html">Brake System</a>
+        <a href="shop.html">Electrical Parts</a>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <a href="tel:+233555505171"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> 055 550 5171</a>
+        <a href="mailto:2aautoparts@gmail.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> 2aautoparts@gmail.com</a>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Opp. Ashaisec, Goil Filling Station,<br>Tema, Ghana</span>
+      </div>
+    </div>
+    <div class="container copyright">
+      <span>© 2026 2A Auto Parts. All Rights Reserved.</span>
+      <span>Designed with ♥ for performance.</span>
+    </div>
+  </footer>
+
+  <script src="global.js"></script>
+</body>
+</html>
