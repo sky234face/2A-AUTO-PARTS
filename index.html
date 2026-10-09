@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="2A Auto Parts — quality auto parts for cars, trucks and heavy-duty vehicles in Tema, Ghana.">
   <title>2A Auto Parts | Home</title>
+  
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +29,6 @@
     /* HEADER & NAVIGATION */
     .header { position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,.05); background: rgba(5,11,18,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     .nav { height: 90px; display: flex; align-items: center; gap: 30px; position: relative; }
-    /* YELLOW RING ADDED HERE */
     .brand img { width: 70px; height: 70px; border-radius: 50%; display: block; object-fit: cover; position: relative; z-index: 1001; border: 2px solid var(--yellow); }
     
     .nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
@@ -79,7 +80,7 @@
     .trust-bar b { font-size: 13px; color: #fff; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 4px; }
     .trust-bar small { font-size: 11px; color: var(--muted); line-height: 1.4; }
 
-    /* CATEGORIES SECTION (MASSIVE ANIMATED CARDS) */
+    /* CATEGORIES SECTION */
     .categories { background: #fff; padding: 120px 0; }
     .center { text-align: center; }
     .section-heading { margin-bottom: 80px; }
@@ -89,7 +90,6 @@
 
     .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 70px; }
     
-    /* Bigger, Bouncier Cards */
     .category-card { 
       background: #fff; 
       border: 1px solid var(--border); 
@@ -123,7 +123,6 @@
       margin-top: 15px;
     }
     
-    /* The Massive Leaping Images */
     .category-art { 
       height: 250px; 
       width: 100%; 
@@ -140,13 +139,81 @@
       filter: drop-shadow(0 30px 40px rgba(0,0,0,0.3)); 
     }
     
-    /* YOUR LOCAL IMAGE FILES */
     .tyre-art { background-image: url("tyres.png"); }
     .engine-art { background-image: url("engine.png"); }
     .suspension-art { background-image: url("suspension.png"); }
     .brake-art { background-image: url("brakes.png"); }
     .battery-art { background-image: url("battery.png"); }
     .oil-art { background-image: url("oil.png"); }
+
+    /* ------------------------------------------------ */
+    /* UPGRADED POPULAR BRANDS SECTION                  */
+    /* ------------------------------------------------ */
+    .brands-section { 
+      padding: 110px 0; 
+      background: #f6f8f9; 
+      border-top: 1px solid var(--border); 
+    }
+    
+    .brands-grid { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 30px; 
+      margin-top: 60px; 
+    }
+    
+    /* Made cards bigger, wider, and taller */
+    .brand-card { 
+      background: #fff; 
+      border: 1px solid var(--border); 
+      border-radius: 8px; 
+      padding: 50px 30px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+      box-shadow: 0 5px 20px rgba(0,0,0,0.03); 
+      text-align: center;
+      min-height: 220px;
+    }
+    
+    /* Stronger lift and pop on hover */
+    .brand-card:hover { 
+      transform: translateY(-10px); 
+      border-color: var(--yellow); 
+      box-shadow: 0 25px 50px rgba(5,11,18,0.1); 
+    }
+    
+    .brand-img-wrap { 
+      height: 100px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      margin-bottom: 25px; 
+      width: 100%;
+    }
+    
+    /* Removed grayscale! Images are full color and scale up larger */
+    .brand-img-wrap img { 
+      max-width: 180px; 
+      max-height: 100%; 
+      object-fit: contain; 
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+    }
+    
+    .brand-card:hover .brand-img-wrap img { 
+      transform: scale(1.1); 
+    }
+    
+    .brand-name { 
+      font-family: "Barlow Condensed", sans-serif; 
+      font-size: 20px; 
+      font-weight: 800; 
+      color: var(--navy); 
+      text-transform: uppercase; 
+      letter-spacing: 1.5px; 
+    }
 
     /* ABOUT SECTION */
     .about { position: relative; min-height: 600px; display: flex; align-items: center; background: #050b12; color: #fff; overflow: hidden; }
@@ -227,6 +294,7 @@
     /* RESPONSIVE CSS */
     @media(max-width: 1100px) {
       .category-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
       .contact-grid { grid-template-columns: 1fr 1fr; }
       .map-container { display: none; }
     }
@@ -258,7 +326,7 @@
     @media(max-width: 680px) {
       .container { width: min(100% - 28px, 1200px); }
       .nav { height: 75px; }
-      .brand img { width: 55px; height: 55px; }
+      .brand img { width: 50px; height: 50px; }
       
       .hero { min-height: 600px; padding-top: 80px; }
       .hero-content { padding: 40px 0 80px; text-align: center; }
@@ -268,9 +336,13 @@
       .trust-bar { grid-template-columns: 1fr; }
       .trust-bar > div { border-right: none; }
       
-      /* Mobile Category Grid (1 Massive Column) */
       .category-grid { grid-template-columns: 1fr; gap: 35px; }
-      .category-art { height: 260px; } /* Huge mobile parts */
+      .category-art { height: 260px; }
+      
+      .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .brand-card { padding: 35px 20px; min-height: 160px; }
+      .brand-img-wrap { height: 100px; }
+      .brand-img-wrap img { max-width: 180px; }
       
       .about h2, .heavy-text h2, .location-info h2, .help-card h2 { font-size: 40px; }
       .heavy-content { flex-direction: column; text-align: center; align-items: center; }
@@ -392,6 +464,130 @@
         
         <div class="center animate-on-scroll">
           <a class="btn btn-outline" style="color: var(--navy); border-color: var(--border);" href="shop.html">VIEW ALL CATEGORIES <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR BRANDS SECTION -->
+    <section class="brands-section" id="brands">
+      <div class="container">
+        <div class="section-heading center animate-on-scroll">
+          <p class="eyebrow">TRUSTED OEM PARTNERS</p>
+          <h2>Top Commercial <span>Brands We Stock</span></h2>
+        </div>
+        
+        <div class="brands-grid animate-on-scroll">
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-bosch.png" alt="Bosch" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>BOSCH</text></svg>'">
+            </div>
+            <span class="brand-name">Bosch</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-wabco.png" alt="Wabco" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>WABCO</text></svg>'">
+            </div>
+            <span class="brand-name">Wabco</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-mahle.png" alt="Mahle" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MAHLE</text></svg>'">
+            </div>
+            <span class="brand-name">Mahle</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-knorr.png" alt="Knorr-Bremse" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>KNORR</text></svg>'">
+            </div>
+            <span class="brand-name">Knorr-Bremse</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-mann.png" alt="Mann-Filter" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MANN</text></svg>'">
+            </div>
+            <span class="brand-name">Mann-Filter</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-sachs.png" alt="Sachs" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>SACHS</text></svg>'">
+            </div>
+            <span class="brand-name">Sachs</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-fleetguard.png" alt="Fleetguard" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>FLEETGUARD</text></svg>'">
+            </div>
+            <span class="brand-name">Fleetguard</span>
+          </div>
+
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-michelin.png" alt="Michelin" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MICHELIN</text></svg>'">
+            </div>
+            <span class="brand-name">Michelin</span>
+          </div>
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-mrf.png" alt="Mrf" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MRF</text></svg>'">
+            </div>
+            <span class="brand-name">Mrf</span>
+          </div>
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-yokohama.png" alt="Yokohama" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>YOKOHAMA</text></svg>'">
+            </div>
+            <span class="brand-name">Yokohama</span>
+          </div>
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-goodyear.png" alt="GoodYear" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>GOODYEAR</text></svg>'">
+            </div>
+            <span class="brand-name">GoodYear</span>
+          </div>
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-bridgestone.png" alt="Bridgestone" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>BRIDGESTONE</text></svg>'">
+            </div>
+            <span class="brand-name">Bridgestone</span>
+          </div>
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-continental.png" alt="Continental" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>CONTINENTAL</text></svg>'">
+            </div>
+            <span class="brand-name">Continental</span>
+          </div>
+          
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-hengst.png" alt="Hengst" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MERITOR</text></svg>'">
+            </div>
+            <span class="brand-name">Hengst</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-linglong.png" alt="Linglong" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MERITOR</text></svg>'">
+            </div>
+            <span class="brand-name">linglong</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-img-wrap">
+              <img src="brand-amaron.png" alt="Amaron" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><rect width=\'100\' height=\'40\' fill=\'%23e7eaed\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%2366717e\'>MERITOR</text></svg>'">
+            </div>
+            <span class="brand-name">Amaron</span>
+          </div>
+
         </div>
       </div>
     </section>
